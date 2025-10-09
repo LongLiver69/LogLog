@@ -12,7 +12,7 @@ export function initializeKeycloak(keycloakService: KeycloakService) {
           window.location.origin + '/silent-check-sso.html',
       },
       bearerExcludedUrls: ['/assets'],
-      enableBearerInterceptor: true,
+      // enableBearerInterceptor: true,
     }).then(() => {
       console.log('Keycloak initialized successfully');
     }).catch(err => {
