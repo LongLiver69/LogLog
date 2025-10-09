@@ -1,5 +1,4 @@
-// import { canActivateAuthRole } from './guards/authentication.guard';
-import { authGuard } from './guards/authentication.guard';
+import { AuthGuard } from './guards/authentication.guard';
 import { NxWelcome } from './nx-welcome';
 import { Route } from '@angular/router';
 
@@ -11,9 +10,8 @@ export const appRoutes: Route[] = [
   {
     path: 'repo_chat',
     loadChildren: () => import('repo_chat/Routes').then((m) => m!.remoteRoutes),
-    // canActivate: [canActivateAuthRole],
-    // data: { role: 'longtest' },
-    canActivate: [authGuard]
+    canActivate: [AuthGuard],
+    data: { roles: ['admin', 'usertest'] },
   },
   {
     path: '',

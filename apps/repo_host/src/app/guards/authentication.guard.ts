@@ -1,45 +1,62 @@
-import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { inject } from '@angular/core';
-import { AuthGuardData, createAuthGuard } from 'keycloak-angular';
-import { KeycloakService } from '../utils/keycloak.service';
+import { Injectable } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
+import { KeycloakAuthGuard, KeycloakService } from 'keycloak-angular';
 
-// const isAccessAllowed = async (
-//   route: ActivatedRouteSnapshot,
-//   _: RouterStateSnapshot,
-//   authData: AuthGuardData
-// ): Promise<boolean | UrlTree> => {
-//   debugger
-//   const { authenticated, grantedRoles } = authData;
-//   const requiredRole = route.data['role'];
-//   if (!requiredRole) { 
-//     return false;
-//   }
-
-//   const hasRequiredRole = (role: string): boolean =>
-//     Object.values(grantedRoles.resourceRoles).some((roles) => roles.includes(role));
-
-//   if (authenticated && hasRequiredRole(requiredRole)) {    
-//     return true;
-//   } else {
-//     const keycloakService = inject(KeycloakService);
-//     await keycloakService.login();
-//     return false;
-//   }
-
-//   // const router = inject(Router);
-//   // return router.parseUrl('/forbidden');
-// };
-
-// export const canActivateAuthRole = createAuthGuard<CanActivateFn>(isAccessAllowed);
-
-export const authGuard: CanActivateFn = () => {
-  const tokenService = inject(KeycloakService);
-  const router = inject(Router);
-    
-  if (!tokenService.keycloak.token || tokenService.keycloak.isTokenExpired()) {
-    
-    router.navigate(['/']);
-    return false;
+@Injectable({
+  providedIn: 'root', 
+})
+export class AuthGuard extends KeycloakAuthGuard {
+  constructor(
+    protected override readonly router: Router,
+    protected readonly keycloak: KeycloakService
+  ) {
+    super(router, keycloak);
   }
-  return true;
-};
+
+  /**
+   * Phương thức chính để xác định quyền truy cập
+   * @param route ActivatedRouteSnapshot chứa thông tin route và data (bao gồm requiredRoles)
+   * @param state RouterStateSnapshot
+   * @returns Promise<boolean | UrlTree>
+   */
+  public async isAccessAllowed(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Promise<boolean | UrlTree> {
+    // 1. Kiểm tra trạng thái đăng nhập
+    if (!this.authenticated) {
+      // Nếu chưa đăng nhập, chuyển hướng đến trang login của Keycloak
+      await this.keycloak.login({
+        redirectUri: window.location.origin + state.url,
+      });
+      return false;
+    }
+
+    // 2. Lấy danh sách roles yêu cầu từ cấu hình route (data)
+    const requiredRoles = route.data['roles'] || [];
+
+    // Nếu không có roles nào được yêu cầu, cho phép truy cập
+    if (!requiredRoles || requiredRoles.length === 0) {
+      return true;
+    }
+
+    // 3. Kiểm tra phân quyền roles
+    // hasRole() kiểm tra xem người dùng có bất kỳ role nào trong danh sách requiredRoles không
+    const hasRequiredRole = requiredRoles.some((role: string) => 
+      this.keycloak.isUserInRole(role)
+    );
+
+    if (hasRequiredRole) {
+      return true;
+    } else {
+      // Nếu không có role phù hợp, chuyển hướng đến trang lỗi (ví dụ: 403 Forbidden)
+      this.router.navigate(['/access-denied']);
+      return false;
+    }
+  }
+}

@@ -1,15 +1,14 @@
 import {
+  APP_INITIALIZER,
   ApplicationConfig,
-  inject,
-  provideAppInitializer,
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { KeycloakService } from './utils/keycloak.service';
-import { KeycloakHttpInterceptor } from './utils/keycloak-http.interceptor';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { KeycloakBearerInterceptor, KeycloakService } from 'keycloak-angular';
+import { initializeKeycloak } from './keycloak.config';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,11 +16,19 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
     provideHttpClient(
-      withInterceptors([KeycloakHttpInterceptor])
+      withInterceptorsFromDi()
     ),
-    provideAppInitializer(() => {
-      const keycloak = inject(KeycloakService);
-      return keycloak.init();
-    })
+    KeycloakService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService],
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: KeycloakBearerInterceptor,
+      multi: true,
+    },
   ]
 };
