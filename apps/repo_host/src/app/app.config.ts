@@ -15,9 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
-    provideHttpClient(
-      withInterceptorsFromDi()
-    ),
+    provideHttpClient(),
     KeycloakService,
     {
       provide: APP_INITIALIZER,

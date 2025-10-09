@@ -48,7 +48,7 @@
     "@angular/platform-browser": "~20.3.0",
     "@angular/router": "~20.3.0",
     "@nx/angular": "^21.6.3",
-    "keycloak-angular": "^19.0.2",
+    "keycloak-angular": "^20.0.0",
     "keycloak-js": "^26.2.0",
     "ng-zorro-antd": "^20.3.1",
     "rxjs": "~7.8.0",
