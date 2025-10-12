@@ -8,12 +8,16 @@
   "targets": {
     "build": {
       "executor": "@nx/angular:webpack-browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/repo_host",
         "index": "apps/repo_host/src/index.html",
         "main": "apps/repo_host/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/repo_host/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -22,7 +26,14 @@
             "input": "apps/repo_host/public"
           }
         ],
-        "styles": ["apps/repo_host/src/styles.scss"],
+        "styles": [
+          "apps/repo_host/src/styles.scss",
+          "node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+          "node_modules/ng-zorro-antd/resizable/style/index.min.css",
+          "node_modules/ng-zorro-antd/code-editor/style/index.min.css",
+          "node_modules/ng-zorro-antd/graph/style/index.min.css",
+          "node_modules/bootstrap/scss/bootstrap.scss"
+        ],
         "customWebpackConfig": {
           "path": "apps/repo_host/webpack.config.ts"
         }
