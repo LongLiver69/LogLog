@@ -18,13 +18,20 @@ import { provideNzIcons } from 'ng-zorro-antd/icon';
 import { en_US, provideNzI18n, vi_VN } from 'ng-zorro-antd/i18n';
 import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
+import { NzConfig, provideNzConfig } from 'ng-zorro-antd/core/config';
 
 registerLocaleData(vi);
 
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
 };
-const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key])
+const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key]);
+
+const ngZorroConfig: NzConfig = {
+  theme: {
+    primaryColor: '#781badff'
+  }
+};
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -33,18 +40,18 @@ export const appConfig: ApplicationConfig = {
     provideRouter(appRoutes),
     provideHttpClient(),
     KeycloakService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeKeycloak,
-      multi: true,
-      deps: [KeycloakService],
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: KeycloakBearerInterceptor,
-      multi: true,
-    },
-
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: initializeKeycloak,
+    //   multi: true,
+    //   deps: [KeycloakService],
+    // },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: KeycloakBearerInterceptor,
+    //   multi: true,
+    // },
+    provideNzConfig(ngZorroConfig),
     provideAnimationsAsync(),
     provideNzIcons(icons),
     provideNzI18n(vi_VN)

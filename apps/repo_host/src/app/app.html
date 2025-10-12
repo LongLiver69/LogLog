@@ -1,7 +1,7 @@
 <nz-layout>
   <nz-header>
     <div class="logo">
-      <i nz-icon nzType="global" nzTheme="outline"></i>
+      <nz-icon nzType="global" nzTheme="outline" />
       <span class="ms-2">LogLog</span>
     </div>
 
@@ -13,9 +13,13 @@
     </ng-template>
 
     <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
-      <li nz-menu-item>nav 1</li>
-      <li nz-menu-item>nav 2</li>
-      <li nz-menu-item>nav 3</li>
+      <li nz-menu-item>
+        <nz-icon nzType="message" nzTheme="outline" />
+      </li>
+      <li nz-menu-item routerLink="repo_feed">
+        <nz-icon nzType="bell" nzTheme="outline" />
+      </li>
+      <li nz-menu-item>Avatar</li>
     </ul>
   </nz-header>
   <nz-layout style="margin-top: 64px;">

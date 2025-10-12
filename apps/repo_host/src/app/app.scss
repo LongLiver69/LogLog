@@ -5,6 +5,7 @@ nz-header {
   position: fixed;
   z-index: 1;
   width: 100%;
+  box-shadow: 0 2px 4px #808080;
 }
 
 .logo {
@@ -47,4 +48,9 @@ nz-content {
   overflow: auto;
   width: 360px !important;
   height: 100%;
+}
+
+nz-icon {
+  font-size: 20px !important;
+  font-weight: bold;
 }

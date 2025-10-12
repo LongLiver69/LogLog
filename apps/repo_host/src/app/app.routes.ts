@@ -6,7 +6,7 @@ export const appRoutes: Route[] = [
   {
     path: 'repo_feed',
     loadChildren: () => import('repo_feed/Routes').then((m) => m!.remoteRoutes),
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   {
     path: 'repo_chat',
@@ -17,6 +17,6 @@ export const appRoutes: Route[] = [
   {
     path: '',
     component: NxWelcome,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
 ];
