@@ -7,18 +7,18 @@ import {
 import { provideRouter } from '@angular/router';
 import { registerLocaleData } from '@angular/common';
 import vi from '@angular/common/locales/vi';
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 
 import { appRoutes } from './app.routes';
 import { KeycloakBearerInterceptor, KeycloakService } from 'keycloak-angular';
 import { initializeKeycloak } from './keycloak.config';
 
 import { provideNzIcons } from 'ng-zorro-antd/icon';
-import { en_US, provideNzI18n, vi_VN } from 'ng-zorro-antd/i18n';
+import { en_US, NZ_DATE_LOCALE, provideNzI18n, vi_VN } from 'ng-zorro-antd/i18n';
 import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
 import { NzConfig, provideNzConfig } from 'ng-zorro-antd/core/config';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 registerLocaleData(vi);
 
@@ -30,7 +30,23 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
 const ngZorroConfig: NzConfig = {
   theme: {
     primaryColor: '#781badff'
-  }
+  },
+  table: {
+    nzBordered: true,
+  },
+  button: {
+    nzSize: 'large',
+  },
+  image: {
+    nzDisablePreview: 'true',
+  },
+  form: {
+    nzNoColon: true,
+  },
+  datePicker: {},
+  // empty: {
+  //   nzDefaultEmptyContent: NoDataComponent,
+  // },
 };
 
 export const appConfig: ApplicationConfig = {
@@ -39,6 +55,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
     provideHttpClient(),
+    provideAnimationsAsync(),
     KeycloakService,
     // {
     //   provide: APP_INITIALIZER,
@@ -52,8 +69,8 @@ export const appConfig: ApplicationConfig = {
     //   multi: true,
     // },
     provideNzConfig(ngZorroConfig),
-    provideAnimationsAsync(),
     provideNzIcons(icons),
-    provideNzI18n(vi_VN)
+    provideNzI18n(vi_VN),
+    { provide: NZ_DATE_LOCALE, useValue: vi },
   ]
 };
