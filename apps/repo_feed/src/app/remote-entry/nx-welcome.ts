@@ -10,6 +10,5 @@ import { CommonModule } from '@angular/common';
     </div>
   `,
   styles: [],
-  encapsulation: ViewEncapsulation.None,
 })
 export class NxWelcome {}

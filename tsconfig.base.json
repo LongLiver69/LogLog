@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@log-log/shared": ["libs/core/src/index.ts"],
+      "@loglog-libs/core": ["libs/core/src/index.ts"],
       "repo_chat/Routes": [
         "apps/repo_chat/src/app/remote-entry/entry.routes.ts"
       ],
