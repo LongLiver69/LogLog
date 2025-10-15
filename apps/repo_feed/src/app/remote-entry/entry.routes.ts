@@ -1,4 +1,9 @@
 import { Route } from '@angular/router';
-import { NxWelcome } from './nx-welcome';
+import { HomeContent } from '../components/home-content/home-content';
 
-export const remoteRoutes: Route[] = [{ path: '', component: NxWelcome }];
+export const remoteRoutes: Route[] = [
+  { 
+    path: '', 
+    component: HomeContent
+  }
+];
