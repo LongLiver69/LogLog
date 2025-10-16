@@ -39,6 +39,12 @@ nz-header {
   min-height: 100%;
 }
 
+@media (min-width: 1024px) {
+  .left-layout {
+    display: none;
+  }
+}
+
 .left-layout {
   position: fixed;
   left: 0;
