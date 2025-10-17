@@ -6,7 +6,7 @@ import {
 import { provideRouter } from '@angular/router';
 import { registerLocaleData } from '@angular/common';
 import vi from '@angular/common/locales/vi';
-import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withFetch } from '@angular/common/http';
 
 import { appRoutes } from './app.routes';
 import { KeycloakBearerInterceptor, KeycloakService } from 'keycloak-angular';
@@ -52,7 +52,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
-    provideHttpClient(),
+    provideHttpClient(withFetch()),
     provideAnimationsAsync(),
     KeycloakService,
     // {

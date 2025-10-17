@@ -17,6 +17,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'repo_chat',
+    component: MainLayoutComponent,
     loadChildren: () => import('repo_chat/Routes').then((m) => m!.remoteRoutes),
     // canActivate: [AuthGuard],
     // data: { roles: ['admin', 'usertest'] },
