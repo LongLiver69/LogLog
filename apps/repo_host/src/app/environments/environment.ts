@@ -4,4 +4,5 @@ export const environment = {
     realm: 'master',
     clientId: 'angular-client',
   },
+  signalrHubUrl: 'http://localhost:5000/hub',
 };
