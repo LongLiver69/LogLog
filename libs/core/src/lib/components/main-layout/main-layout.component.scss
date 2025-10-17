@@ -39,7 +39,7 @@ nz-header {
   min-height: 100%;
 }
 
-@media (min-width: 1024px) {
+@media (max-width: 1024px) {
   .left-layout {
     display: none;
   }
