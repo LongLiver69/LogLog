@@ -20,7 +20,7 @@ body {
 
 .container {
   margin: 0 auto;
-  width: 750px;
+  width: 100%;
   background: #444753;
   border-radius: 5px;
 }
@@ -29,77 +29,13 @@ ul li {
   list-style: none;
 }
 
-.people-list {
-  width: 260px;
-  height: 100%;
-  float: left;
-
-  .search {
-    padding: 20px;
-  }
-
-  input {
-    border-radius: 3px;
-    border: none;
-    padding: 14px;
-    color: white;
-    background: #6A6C75;
-    width: 90%;
-    font-size: 14px;
-
-    &::placeholder {
-      color: #fff;
-    }
-  }
-
-  .fa-search {
-    position: relative;
-    left: -25px;
-  }
-
-  ul {
-    padding: 20px;
-
-    li {
-      padding-bottom: 20px;
-    }
-  }
-
-  img {
-    float: left;
-  }
-
-  .about {
-    float: left;
-    margin-top: 8px;
-  }
-
-  .about {
-    padding-left: 8px;
-  }
-
-  .status {
-    color: $gray;
-  }
-
-  .btn-logout {
-    display: block;
-    width: 100%;
-    height: 36px;
-    cursor: pointer;
-  }
-
-}
-
 .chat {
-  width: 490px;
+  width: calc(100% - 10px);
   height: 100%;
-  float: left;
   background: #F2F5F8;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-
+  border-radius: 5px;
   color: #434651;
+  margin: 10px auto;
 
   .chat-header {
     padding: 20px;
@@ -136,7 +72,7 @@ ul li {
     padding: 30px 30px 20px;
     border-bottom: 2px solid $orange;
     overflow-y: scroll;
-    height: 575px;
+    height: 340px;
 
     ul {
       padding: 0;

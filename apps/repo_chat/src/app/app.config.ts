@@ -8,6 +8,7 @@ import { appRoutes } from './app.routes';
 import { provideNzIcons } from 'ng-zorro-antd/icon';
 import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
+import { provideHttpClient } from '@angular/common/http';
 
 const antDesignIcons = AllIcons as { [key: string]: IconDefinition };
 const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
@@ -19,6 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
+    provideHttpClient(),
     provideNzIcons(icons)
   ],
 };

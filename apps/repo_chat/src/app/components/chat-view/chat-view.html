@@ -22,14 +22,11 @@
             [ngClass]="{'float-right my-message': meId == item.fromUserId, ' other-message': meId != item.fromUserId}">
             {{ item.msg }}
           </div>
-          <!-- <div class="message">
-            {{ item.msg }}
-          </div> -->
         </li>
         }
       </ul>
 
-    </div> <!-- end chat-history -->
+    </div>
 
     <div class="chat-message clearfix">
       <textarea name="message-to-send" id="message-to-send" [(ngModel)]="msg" (keydown.enter)="sendMsg()"
@@ -40,8 +37,8 @@
 
       <button (click)="sendMsg()">Send</button>
 
-    </div> <!-- end chat-message -->
+    </div>
 
-  </div> <!-- end chat -->
+  </div>
 
-</div> <!-- end container -->
+</div>
