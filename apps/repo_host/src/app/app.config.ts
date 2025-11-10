@@ -55,17 +55,17 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideAnimationsAsync(),
     KeycloakService,
-    // {
-    //   provide: APP_INITIALIZER,
-    //   useFactory: initializeKeycloak,
-    //   multi: true,
-    //   deps: [KeycloakService],
-    // },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: KeycloakBearerInterceptor,
-    //   multi: true,
-    // },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService],
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: KeycloakBearerInterceptor,
+      multi: true,
+    },
     provideNzConfig(ngZorroConfig),
     provideNzIcons(icons),
     provideNzI18n(vi_VN),

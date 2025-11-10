@@ -12,7 +12,7 @@
       <nz-icon nzType="search" />
     </ng-template>
 
-    <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
+    <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu" [nzSelectable]="false">
       <li nz-menu-item routerLink="/repo_chat">
         <nz-badge [nzCount]="messageCount" [nzOverflowCount]="99" nzSize="small" nzColor="blue">
           <nz-icon nzType="message" nzTheme="outline" />
@@ -23,10 +23,19 @@
           <nz-icon nzType="bell" nzTheme="outline" />
         </nz-badge>
       </li>
-      <li nz-menu-item>
+      <li nz-menu-item nz-dropdown [nzDropdownMenu]="menu" nzTrigger="click">
         <img src="assets/images/avatar.png" alt="avatar"
         style="object-fit: cover; width: 36px; height: 36px; border-radius: 50px;" />
       </li>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu>
+          <li nz-menu-item>Thông tin cá nhân</li>
+          <li nz-menu-item>Đổi mật khẩu</li>
+          <li nz-menu-item>Cài đặt</li>
+          <li nz-menu-divider></li>
+          <li nz-menu-item (click)="logout()">Đăng xuất</li>
+        </ul>
+      </nz-dropdown-menu>
     </ul>
   </nz-header>
 

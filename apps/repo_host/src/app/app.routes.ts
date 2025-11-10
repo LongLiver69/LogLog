@@ -7,11 +7,11 @@ export const appRoutes: Route[] = [
     path: '',
     component: MainLayoutComponent,
     loadChildren: () => import('repo_feed/Routes').then((m) => m!.remoteRoutes),
+    canActivate: [AuthGuard],
     // children: [
     //   {
     //     path: 'repo_feed',
     //     loadChildren: () => import('repo_feed/Routes').then((m) => m!.remoteRoutes),
-    //     // canActivate: [AuthGuard],
     //   },
     // ]
   },
@@ -19,7 +19,7 @@ export const appRoutes: Route[] = [
     path: 'repo_chat',
     component: MainLayoutComponent,
     loadChildren: () => import('repo_chat/Routes').then((m) => m!.remoteRoutes),
-    // canActivate: [AuthGuard],
-    // data: { roles: ['admin', 'usertest'] },
+    canActivate: [AuthGuard],
+    data: { roles: ['admin', 'usertest'] },
   },
 ];

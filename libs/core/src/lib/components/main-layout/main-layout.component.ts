@@ -9,10 +9,11 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 
 @Component({
   selector: 'lib-main-layout',
-  imports: [RouterModule, NzBreadCrumbModule, NzIconModule, NzMenuModule, NzLayoutModule, NzInputModule, NgTemplateOutlet, NzButtonModule, NzBadgeModule],
+  imports: [RouterModule, NzBreadCrumbModule, NzIconModule, NzMenuModule, NzLayoutModule, NzInputModule, NgTemplateOutlet, NzButtonModule, NzBadgeModule, NzDropDownModule],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss',
 })
@@ -87,4 +88,5 @@ export class MainLayoutComponent {
       disabled: false
     }
   ];
+
 }
