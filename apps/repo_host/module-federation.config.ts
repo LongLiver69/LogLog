@@ -7,12 +7,12 @@ const config: ModuleFederationConfig = {
     'repo_feed'
   ],
   shared: (libraryName, defaultConfig) => {
-    // Force SignalR to be singleton
-    if (libraryName === '@microsoft/signalr') {
+    if (libraryName === '@loglog-libs/core') {
       return {
         singleton: true,
         strictVersion: false,
         requiredVersion: false,
+        eager: true,
       };
     }
     return defaultConfig;

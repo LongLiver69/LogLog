@@ -6,8 +6,7 @@ const config: ModuleFederationConfig = {
     './Routes': 'apps/repo_feed/src/app/remote-entry/entry.routes.ts',
   },
   shared: (libraryName, defaultConfig) => {
-    // Force SignalR to be singleton
-    if (libraryName === '@microsoft/signalr') {
+    if (libraryName === '@loglog-libs/core') {
       return {
         singleton: true,
         strictVersion: false,
