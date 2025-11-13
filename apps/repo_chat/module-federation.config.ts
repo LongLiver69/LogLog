@@ -5,6 +5,17 @@ const config: ModuleFederationConfig = {
   exposes: {
     './Routes': 'apps/repo_chat/src/app/remote-entry/entry.routes.ts',
   },
+  shared: (libraryName, defaultConfig) => {
+    // Force SignalR to be singleton
+    if (libraryName === '@microsoft/signalr') {
+      return {
+        singleton: true,
+        strictVersion: false,
+        requiredVersion: false,
+      };
+    }
+    return defaultConfig;
+  },
 };
 
 /**

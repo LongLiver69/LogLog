@@ -11,6 +11,8 @@ import { HTTP_INTERCEPTORS, provideHttpClient, withFetch } from '@angular/common
 import { appRoutes } from './app.routes';
 import { KeycloakBearerInterceptor, KeycloakService } from 'keycloak-angular';
 import { initializeKeycloak } from './keycloak.config';
+// import { SignalrService } from '@loglog-libs/core';
+// import { environment } from './environments/environment';
 
 import { provideNzIcons } from 'ng-zorro-antd/icon';
 import { en_US, NZ_DATE_LOCALE, provideNzI18n, vi_VN } from 'ng-zorro-antd/i18n';
@@ -48,6 +50,12 @@ const ngZorroConfig: NzConfig = {
   // },
 };
 
+// function initializeSignalR(signalrService: SignalrService) {
+//   return () => {
+//     signalrService.configure({ hubUrl: environment.signalrHubUrl });
+//   };
+// }
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
@@ -61,6 +69,12 @@ export const appConfig: ApplicationConfig = {
       multi: true,
       deps: [KeycloakService],
     },
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: initializeSignalR,
+    //   multi: true,
+    //   deps: [SignalrService],
+    // },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: KeycloakBearerInterceptor,
