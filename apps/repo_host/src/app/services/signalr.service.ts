@@ -5,7 +5,7 @@ import { environment } from '../environments/environment';
 import { KeycloakService } from 'keycloak-angular';
 
 @Injectable({ providedIn: 'root' })
-export class SignalRService {
+export class SignalrService {
   private readonly keycloak = inject(KeycloakService);
 
   private connection?: HubConnection;
