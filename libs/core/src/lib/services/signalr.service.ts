@@ -3,31 +3,18 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HubConnection, HubConnectionBuilder, HubConnectionState, HttpTransportType, LogLevel } from '@microsoft/signalr';
 import { KeycloakService } from 'keycloak-angular';
 
-export interface SignalrConfig {
-  hubUrl: string;
-}
-
 @Injectable({ providedIn: 'root' })
 export class SignalrService {
   private readonly keycloak = inject(KeycloakService);
 
   private connection?: HubConnection;
   private readonly connectionState$ = new BehaviorSubject<HubConnectionState>(HubConnectionState.Disconnected);
-  private hubUrl?: string;
 
   get state$(): Observable<HubConnectionState> {
     return this.connectionState$.asObservable();
   }
 
-  configure(config: SignalrConfig): void {
-    this.hubUrl = config.hubUrl;
-  }
-
   async start(): Promise<void> {
-    if (!this.hubUrl) {
-      throw new Error('SignalR hub URL not configured. Call configure() first.');
-    }
-
     if (this.connection && this.connection.state !== HubConnectionState.Disconnected) {
       return;
     }
@@ -35,7 +22,7 @@ export class SignalrService {
     const accessToken = await this.tryGetAccessToken();
 
     this.connection = new HubConnectionBuilder()
-      .withUrl(this.hubUrl, {
+      .withUrl("http://localhost:5176/hub", {
         accessTokenFactory: accessToken ? () => accessToken : undefined,
         transport: HttpTransportType.WebSockets,
         skipNegotiation: true,
@@ -89,3 +76,5 @@ export class SignalrService {
     }
   }
 }
+
+
