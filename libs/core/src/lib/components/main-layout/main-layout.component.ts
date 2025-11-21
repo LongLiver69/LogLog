@@ -1,4 +1,4 @@
-import { SignalrService } from '@loglog-libs/core';
+// import { SignalrService } from '@loglog-libs/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -21,7 +21,7 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 export class MainLayoutComponent {
   constructor(
     private keycloakService: KeycloakService,
-    private signalrService: SignalrService,
+    // private signalrService: SignalrService,
   ) {
     // this.signalrService.start().catch(err => {
     //   console.error('Error starting SignalR connection in MainLayoutComponent:', err);
