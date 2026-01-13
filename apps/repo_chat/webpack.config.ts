@@ -33,6 +33,13 @@ export default withModuleFederation(config, {
         module: false,
       },
     },
+    ignoreWarnings: [
+      // Suppress Bootstrap SCSS deprecation warnings
+      /Deprecation Warning/,
+      /node_modules\/bootstrap/,
+      /bootstrap\.scss/,
+      (warning: any) => warning.module?.resource?.includes('bootstrap'),
+    ],
   };
 });
 
