@@ -11,8 +11,8 @@ import { HTTP_INTERCEPTORS, provideHttpClient, withFetch } from '@angular/common
 import { appRoutes } from './app.routes';
 import { KeycloakBearerInterceptor, KeycloakService } from 'keycloak-angular';
 import { initializeKeycloak } from './keycloak.config';
-// import { SignalrService } from '@loglog-libs/core';
-// import { environment } from './environments/environment';
+import { SignalrService } from '@loglog-libs/core';
+import { environment } from './environments/environment';
 
 import { provideNzIcons } from 'ng-zorro-antd/icon';
 import { en_US, NZ_DATE_LOCALE, provideNzI18n, vi_VN } from 'ng-zorro-antd/i18n';
@@ -63,12 +63,12 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideAnimationsAsync(),
     KeycloakService,
-    // {
-    //   provide: APP_INITIALIZER,
-    //   useFactory: initializeKeycloak,
-    //   multi: true,
-    //   deps: [KeycloakService],
-    // },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService],
+    },
     // {
     //   provide: APP_INITIALIZER,
     //   useFactory: initializeSignalR,
